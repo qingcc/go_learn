@@ -1,0 +1,53 @@
+<script type="text/javascript" src="/public/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="/public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/public/background/qing/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/public/background/qing_admin/js/H-ui.admin.js"></script>
+<script type="text/javascript" src="/public/common/common.js"></script>
+<script type="text/javascript" src="/public/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="/public/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="/public/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#exit").on("click", function () {
+            var url = $(this).attr("href")
+            $.get(url,[], function (resp) {
+                if (resp.status ==200) {
+                    layer.msg(resp.info)
+                    window.location.href=resp.url;
+                }
+            })
+        })
+    })
+    function addOrEditAjax () {
+        $("form").validate();
+        if ($("form").valid()) {
+            ajaxSubmit()
+        }
+        return false
+    }
+
+    function changeSort(obj,url, id) {
+        var sort = $(obj).val();
+        $.ajax({
+            url:url,
+            type:'POST',
+            async:true,
+            dataType: 'json',
+            data:{id:id,sort:sort},
+            success:function(data){
+                if (data.status == 200){
+                    layer.msg(data.msg,{icon:1});
+                }else{
+                    setTimeout(function () {
+                        parent.layer.msg(data.msg);
+                        window.location.href = data.url;
+                    }, 1000);
+                }
+            },
+            error : function () {
+                console.log(data.msg);
+            }
+        });
+    }
+</script>
+</script>

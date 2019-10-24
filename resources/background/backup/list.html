@@ -1,0 +1,43 @@
+{{define "content"}}
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+    <div class="cl pd-5 bg-1 bk-gray">
+        <span class="l">
+            <a href="/admin/backup/do" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe6e2;</i> 添加备份</a>
+        </span> <span class="r">共有数据：<strong>54</strong> 条</span>
+    </div>
+    <table class="table table-border table-bordered table-sort table-bg">
+        <thead>
+        <tr>
+            <th scope="col" colspan="9">列表</th>
+        </tr>
+        <tr class="text-c">
+            <th width="80%">文件名称</th>
+            <th width="8%">大小</th>
+            <th width="5%">权限</th>
+            <th width="5%">操作</th>
+        </tr>
+        </thead>
+        <tbody class="checkall">
+        {{ range $key,$val:=.data }}
+        <tr class="text-c">
+            <td>{{ $val.Name }}</td>
+            <td>{{ $val.Size }}</td>
+            <td>{{ $val.Mode }}</td>
+            <td class="td-manage">
+                <a title="下载" href="/admin/backup/download/{{$val.Name}}" class="ml-5 ajax" style="text-decoration:none">
+                    <i class="Hui-iconfont">&#xe6df;</i>
+                </a>
+                <a title="删除" href="/admin/backup/del/{{$val.Name}}" class="ml-5 ajax" style="text-decoration:none">
+                    <i class="Hui-iconfont">&#xe6e2;</i>
+                </a>
+            </td>
+        </tr>
+        {{ end }}
+        </tbody>
+    </table>
+</div>
+
+{{end}}
+{{define "js"}}
+{{end}}

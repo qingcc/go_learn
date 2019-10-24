@@ -1,0 +1,208 @@
+﻿<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+
+    <link rel="stylesheet" type="text/css" href="/public/login/css/styles.css">
+    <link rel="stylesheet" href="/public/login/css/jigsaw.css">
+    <style>
+        #msg {
+            width: 100%;
+            line-height: 40px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div  style="padding-top:100px">
+        <div class="login-wrap">
+            <div class="login-html">
+                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">登录</label>
+                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">注册</label>
+                <div class="login-form">
+                    <form action="/login" id="login">
+                        <div class="sign-in-htm">
+                            <div class="group">
+                                <label for="user" class="label">用户名</label>
+                                <input id="username" name="username" value="admin" type="text" class="input">
+                            </div>
+                            <div class="group">
+                                <label for="pass" class="label">密码</label>
+                                <input id="password" type="password" class="input" data-type="password" name="password">
+                            </div>
+                            <div class="group">
+                                <div class="container">
+                                    <div id="captcha" style="position: relative" data-type="password"></div>
+                                    <div id="msg"></div>
+                                </div>
+                            </div>
+                            <div class="group">
+                                <input id="check" type="checkbox" class="check" checked>
+                                <label for="check"><span class="icon"></span> 保持登录</label>
+                            </div>
+                            <div class="group">
+                                <input type="button" class="button" value="登录" onclick="sub()">
+                            </div>
+                            <div class="hr"></div>
+                            <div class="foot-lnk">
+                                <a href="#forgot">忘记密码?</a>
+                            </div>
+                        </div>
+                    </form>
+                    <form action="/reg" id="reg">
+                        <div class="sign-up-htm">
+                            <div class="group">
+                                <label for="user" class="label">用户名</label>
+                                <input id="users" type="text" class="input" name="username">
+                            </div>
+                            <div class="group">
+                                <label for="pass" class="label">密码</label>
+                                <input id="pass" type="password" class="input" data-type="password" name="pass">
+                            </div>
+                            <div class="group">
+                                <label for="pass" class="label">重复密码</label>
+                                <input id="repass" type="password" class="input" data-type="password" name="repass">
+                            </div>
+                            <div class="group">
+                                <label for="pass" class="label">邮箱地址</label>
+                                <input id="email" type="text" class="input" name="email">
+                            </div>
+                            <div class="group">
+                                <a href="javascript:;"><input type="button" class="button" value="注册" onclick="reg()"></a>
+                            </div>
+                            <div class="hr"></div>
+                            <div class="foot-lnk">
+                                <label for="tab-1">已经成员?</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/public/login/js/jigsaw.js"></script>
+    <script type="text/javascript" src="/public/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/public/js/index.js"></script>
+    {{/*<script type="text/javascript" src="/public/js/jquery.js"></script>*/}}
+    <script type="text/javascript" src="/public/js/layer/layer.js"></script>
+    <script>
+        var flag = false;
+        function sub() {
+            var name = document.getElementById('username').value;
+            var pass = document.getElementById('password').value;
+
+            if (name == ""){
+                layer.msg("用户名不能为空!")
+                return
+            }
+            if (pass == "") {
+                layer.msg("密码不能为空!")
+                return
+            }
+            if (flag == false) {
+                layer.msg("验证失败!")
+            }
+            // var url = $("#login").attr("action");
+            // debugger
+            // var _form = $("#username").parents("form").eq(0);
+            // _form.attr("method", "post")
+            // _form.attr("action", url)
+            // _form.submit();
+
+            var url = $('#login').attr("action");
+            $.ajax({
+                type:"delete",
+                data:{name:name, pass:pass},
+                url:url,
+                dataType:'json',
+                success:function (data) {
+                    if (data.status == 200) {
+                        layer.msg("登录成功!");
+                        $.post('/user/chat', {keyid:data.data.id,token:data.data.token}, function( dta ) {
+                            $("html").html(dta);
+                        });
+                        // window.location.href = "/user/chat"
+                        var url = "/user/t_chat?id=" + data.data.id + "&token=" + data.data.token;
+                        // $.get("/user/t_chat", { id: data.data.id, token: data.data.token } );
+                        // var url = "/user/t_chat?id=" + data.data.id + "&token=" + data.data.token;
+                        window.location.href = url
+                        // var parames = new Array();
+                        // parames.push({ name: "token", value: data.data.token });
+                        // parames.push({ name: "keyid", value: data.data.id });
+                        // console.log(parames)
+                        // // post_and_open(url, parames)
+                        // StandardPost(url, parames)
+
+                    }else {
+                        layer.msg(data.msg)
+                        return false
+                    }
+                },
+                error:function (data) {
+                    console.log(data)
+                }
+            });
+        }
+        function reg() {
+            var name = document.getElementById('users').value;
+            var pass = document.getElementById('pass').value;
+            var repass = document.getElementById('repass').value;
+            var email = document.getElementById('email').value;
+            if (name == "") {
+                layer.msg("用户名不能为空!")
+                return
+            }
+            if (pass == "") {
+                layer.msg("密码不能为空!")
+                return
+            }
+            if (repass == "") {
+                layer.msg("确认密码不能为空!")
+                return
+            }
+            if (email == "") {
+                layer.msg("邮箱不能为空!")
+                return
+            }
+            if (pass != repass) {
+                layer.msg("两次密码不一致!")
+                return
+            }
+            var url = $("#reg").attr("action");
+            $.ajax({
+                type:"post",
+                data:{name:name, pass:pass, email:email},
+                url:url,
+                dataType:'json',
+                success:function (data) {
+                    if (data.status == 200) {
+                        layer.msg(data.msg)
+                        window.location.href = "/login"
+                    }else {
+                        layer.msg(data.msg)
+                    }
+                },
+                error:function (data) {
+                    console.log(data)
+                }
+            });
+            return false
+        }
+        jigsaw.init(document.getElementById('captcha'), function () {
+            flag = true;
+            document.getElementById('msg').innerHTML = '登录成功！'
+        })
+    </script>
+
+
+</body>
+</html>
+<!--下面是无用代码-->
+{{/*<a href="http://www.bootstrapmb.com" style="display:none">bootstrapmb</a>*/}}
