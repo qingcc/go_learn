@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"logic"
+	"blog_go/logic"
 	"net"
 	"net/http"
-	"util"
+	"blog_go/util"
 )
 
 var wsupgrader = websocket.Upgrader{

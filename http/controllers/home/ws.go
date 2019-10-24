@@ -7,7 +7,7 @@
 package home
 
 import (
-	"logic"
+	"blog_go/logic"
 	"net/http"
 	"net/url"
 	"strconv"

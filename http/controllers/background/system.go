@@ -1,10 +1,10 @@
 package background
 
 import (
-	"config"
+	"blog_go/config"
 	"github.com/gin-gonic/gin"
-	"logic"
-	"model"
+	"blog_go/logic"
+	"blog_go/model"
 	"net/http"
 )
 

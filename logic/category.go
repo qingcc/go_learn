@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"databases"
+	"blog_go/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"model"
+	"blog_go/model"
 	"strings"
 )
 

@@ -1,12 +1,12 @@
 package background
 
 import (
-	"databases"
+	"blog_go/databases"
 	"github.com/gin-gonic/gin"
-	"logic"
-	"model"
+	"blog_go/logic"
+	"blog_go/model"
 	"net/http"
-	"util"
+	"blog_go/util"
 )
 
 func GetLogin(c *gin.Context) {

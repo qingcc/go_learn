@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"databases"
+	"blog_go/databases"
 	"github.com/garyburd/redigo/redis"
-	"model"
-	"util"
+	"blog_go/model"
+	"blog_go/util"
 )
 
 type ConfigLogic struct{}

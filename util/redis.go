@@ -1,7 +1,7 @@
 package util
 
 import (
-	"databases"
+	"blog_go/databases"
 	"github.com/garyburd/redigo/redis"
 )
 

@@ -1,15 +1,15 @@
 package main
 
 import (
-	"databases"
+	"blog_go/databases"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"model"
+	"blog_go/model"
 	"net/http"
 	"strings"
 	"time"
-	"util"
+	"blog_go/util"
 )
 
 func main() {

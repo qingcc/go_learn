@@ -1,7 +1,7 @@
 package main
 
 import (
-	"databases"
+	"blog_go/databases"
 	"fmt"
 )
 

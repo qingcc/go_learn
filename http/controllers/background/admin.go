@@ -1,16 +1,16 @@
 package background
 
 import (
-	"config"
-	"databases"
+	"blog_go/config"
+	"blog_go/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	//"github.com/polaris1119/logger"
-	"logic"
-	"model"
+	"blog_go/logic"
+	"blog_go/model"
 	"net/http"
 	"strconv"
-	"util"
+	"blog_go/util"
 )
 
 //region Remark: 管理员列表 Author:Qing

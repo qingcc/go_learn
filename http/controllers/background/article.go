@@ -1,15 +1,15 @@
 package background
 
 import (
-	"config"
-	"databases"
+	"blog_go/config"
+	"blog_go/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	//"github.com/polaris1119/logger"
 	"github.com/polaris1119/logger"
 	"html/template"
-	"logic"
-	"model"
+	"blog_go/logic"
+	"blog_go/model"
 	"net/http"
 	"strconv"
 )

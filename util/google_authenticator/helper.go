@@ -7,7 +7,7 @@ import (
 	"image/png"
 	"os"
 	"time"
-	"util"
+	"blog_go/util"
 )
 
 type GoogleAuthInfo struct {

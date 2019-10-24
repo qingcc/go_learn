@@ -1,17 +1,17 @@
 package background
 
 import (
-	"config"
-	"databases"
+	"blog_go/config"
+	"blog_go/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	uuid2 "github.com/satori/go.uuid"
 	"io/ioutil"
-	"model"
+	"blog_go/model"
 	"net/http"
 	"os"
 	"time"
-	"util"
+	"blog_go/util"
 )
 
 //region Remark: 初始化数据 Author:Qing
@@ -76,7 +76,7 @@ func BackUpList(c *gin.Context) {
 
 //region Remark: 备份数据 Author; chijian
 func BackUp(c *gin.Context) {
-	uuid, _ := uuid2.NewV4()
+	uuid := uuid2.NewV4()
 	file := "./uploads/backup/" + uuid.String() + "_" + time.Now().Format("2006_01_02_15_04_05") + ".sql"
 	databases.Orm.DumpAllToFile(file)
 	f1, err := os.Open(file)

@@ -3,9 +3,9 @@ package background
 import (
 	"github.com/gin-gonic/gin"
 
-	"config"
-	"logic"
-	"model"
+	"blog_go/config"
+	"blog_go/logic"
+	"blog_go/model"
 	"net/http"
 )
 

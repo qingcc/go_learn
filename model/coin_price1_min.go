@@ -1,11 +1,11 @@
 package model
 
 import (
-	"databases"
+	"blog_go/databases"
 	"fmt"
 	"github.com/go-xorm/xorm"
 	"time"
-	"util"
+	"blog_go/util"
 )
 
 type CoinPrice1Min struct {

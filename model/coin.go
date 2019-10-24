@@ -1,7 +1,7 @@
 package model
 
 import (
-	"databases"
+	"blog_go/databases"
 	"fmt"
 	"time"
 )

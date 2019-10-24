@@ -1,15 +1,15 @@
 package home
 
 import (
-	"config"
-	"databases"
+	"blog_go/config"
+	"blog_go/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"logic"
-	"model"
+	"blog_go/logic"
+	"blog_go/model"
 	"net/http"
 	"time"
-	"util"
+	"blog_go/util"
 )
 
 func Reg(c *gin.Context) {

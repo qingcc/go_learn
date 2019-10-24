@@ -1,12 +1,12 @@
 package middlewares
 
 import (
-	"config"
+	"blog_go/config"
 	"github.com/gin-gonic/gin"
-	"logic"
+	"blog_go/logic"
 	"net/http"
 	"strconv"
-	"util"
+	"blog_go/util"
 )
 
 func CheckLogin() gin.HandlerFunc {

@@ -1,13 +1,13 @@
 package routers
 
 import (
-	"databases"
+	"blog_go/databases"
 	"github.com/foolin/gin-template"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 
-	"http/controllers/home"
-	"http/middleware/home"
+	"blog_go/http/controllers/home"
+	"blog_go/http/middleware/home"
 )
 
 func InitHomeRouter() *gin.Engine {

@@ -1,14 +1,14 @@
 package home
 
 import (
-	"config"
-	"databases"
+	"blog_go/config"
+	"blog_go/databases"
 	"github.com/gin-gonic/gin"
-	"logic"
-	"model"
+	"blog_go/logic"
+	"blog_go/model"
 	"net/http"
 	"strconv"
-	"util"
+	"blog_go/util"
 )
 
 func GetTData(c *gin.Context) {

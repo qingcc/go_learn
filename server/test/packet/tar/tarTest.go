@@ -23,7 +23,7 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-	"util"
+	"blog_go/util"
 )
 
 func main() {

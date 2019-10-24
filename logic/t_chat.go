@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"databases"
+	"blog_go/databases"
 	"github.com/gin-gonic/gin"
-	"model"
-	"util"
+	"blog_go/model"
+	"blog_go/util"
 )
 
 type TChatLogic struct{}
