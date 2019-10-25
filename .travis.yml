@@ -3,7 +3,14 @@ language:
 go:
 - 1.10.x
 
+cache:
+  directories:
+    - $GOPATH/pkg/mod
 env:
-  - GO111MODULE=on
+        global:
+          - GO111MODULE=on
+          - GOPROXY=https://proxy.golang.org
+          - GOARCH=amd64
+       
 
 
