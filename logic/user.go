@@ -44,7 +44,7 @@ func (self UserLogic) GetOne(field string, val interface{}) *model.User {
 	_, err := databases.Orm.Where(field+" = ?", val).Get(item)
 
 	if err != nil {
-		fmt.Errorf("RoleLogic find errof:", err)
+		fmt.Println("RoleLogic find errof:", err)
 	}
 
 	return item
