@@ -3,4 +3,7 @@ language:
 go:
 - 1.10.x
 
+env:
+  - GO111MODULE=on
+
 
