@@ -12,11 +12,10 @@ env:
           - GOPROXY=https://proxy.golang.org
           - GOARCH=amd64
 before_install:
-  mkdir "${HOME}/go"
-  export GOPATH="${HOME}/go"
+  mkdir "${HOME}/go" && export GOPATH="${HOME}/go"
 
 install:
-  go mod download & make install
-  export PATH="${GOPATH}/bin:${GOROOT}/bin:${PATH}"
+  go mod download & make install &&
+  export PATH="${GOPATH}/bin:${GOROOT}/bin:${PATH}" &&
   make tools
 
