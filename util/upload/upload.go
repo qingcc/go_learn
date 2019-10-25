@@ -1,11 +1,11 @@
 package util
 
 import (
-	"config"
+	"blog_go/config"
 	"github.com/gin-gonic/gin"
 	"github.com/satori/go.uuid"
 	"io"
-	"logic"
+	"blog_go/logic"
 	"net/http"
 	"os"
 	"runtime"
@@ -55,7 +55,7 @@ func upload(c *gin.Context, fileType string, suffix string) gin.H {
 
 	filename := strings.Split(header.Filename, ".")
 	filename_suffix := filename[len(filename)-1]
-	uuid, _ := uuid.NewV4()
+	uuid := uuid.NewV4()
 	new_filename := uuid.String() + "." + filename_suffix
 
 	//判断文件后缀是否允许上传
