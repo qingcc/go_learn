@@ -1,7 +1,7 @@
 package captcha
 
 import (
-	"ruiec.com/app/vendors/session"
+	"blog_go/util"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )
@@ -17,11 +17,11 @@ func GetCaptcha(c *gin.Context) {
 		d[v] %= 10
 		char += strconv.FormatInt(int64(d[v]), 32)
 	}
-	session.SetSession(c, "captcha_value", char)
+	util.SetSession(c, "captcha_value", char)
 	c.Header("Content-Type", "image/png")
 	NewImage(d, width, height).WriteTo(c.Writer)
 }
 func VerifyCaptcha(c *gin.Context, verify_value string) bool {
-	value := session.GetSession(c, "captcha_value")
+	value := util.GetSession(c, "captcha_value")
 	return value == verify_value
 }
