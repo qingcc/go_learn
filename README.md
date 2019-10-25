@@ -1,4 +1,4 @@
-# go_learn
+# goblog
 
 [![Build Status](https://travis-ci.com/qingcc/go_learn.svg?branch=master)](https://travis-ci.com/qingcc/go_learn)
 
