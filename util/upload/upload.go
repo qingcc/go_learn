@@ -55,8 +55,8 @@ func upload(c *gin.Context, fileType string, suffix string) gin.H {
 
 	filename := strings.Split(header.Filename, ".")
 	filename_suffix := filename[len(filename)-1]
-	uuid := uuid.NewV4()
-	new_filename := uuid.String() + "." + filename_suffix
+	uid := uuid.NewV4()
+	new_filename := uid.String() + "." + filename_suffix
 
 	//判断文件后缀是否允许上传
 	if !strings.Contains(suffix, filename_suffix) {

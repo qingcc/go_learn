@@ -38,8 +38,8 @@ func wang_editor_upload(c *gin.Context, fileName string, fileType string, suffix
 		}
 		filename := strings.Split(files[i].Filename, ".")
 		filename_suffix := filename[len(filename)-1]
-		uuid := uuid.NewV4()
-		new_filename := uuid.String() + "." + filename_suffix
+		uid := uuid.NewV4()
+		new_filename := uid.String() + "." + filename_suffix
 
 		//判断文件后缀是否允许上传
 		if !strings.Contains(suffix, filename_suffix) {

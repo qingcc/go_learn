@@ -1,12 +1,9 @@
 package ws
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/qingcc/go_learn/logic"
-	"net"
 	"net/http"
 	"github.com/qingcc/go_learn/util"
 )
@@ -27,7 +24,7 @@ func Wshandler(c *gin.Context) {
 		fmt.Println("failed to set websocket upgrade %+v", err)
 		return
 	}
-	client[user_id] = ws
+	//client[user_id] = ws
 	util.AddWsLinksToRedis(user_id)
 	addUser <- map[string]int{user_id: 1}
 }
