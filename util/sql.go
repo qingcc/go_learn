@@ -1,7 +1,7 @@
 package util
 
 import (
-	"blog_go/databases"
+	"github.com/qingcc/blog_go/databases"
 	"fmt"
 	"io/ioutil"
 )

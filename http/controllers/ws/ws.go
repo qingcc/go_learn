@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"net/http"
-	"blog_go/util"
+	"github.com/qingcc/blog_go/util"
 )
 
 var wsupgrader = websocket.Upgrader{

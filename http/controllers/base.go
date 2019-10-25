@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/polaris1119/logger"
-	"blog_go/logic"
+	"github.com/qingcc/blog_go/logic"
 )
 
 //region Remark: 获取日志实例 Author:Qing

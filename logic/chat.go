@@ -1,11 +1,11 @@
 package logic
 
 import (
-	"blog_go/databases"
+	"github.com/qingcc/blog_go/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"blog_go/model"
-	"blog_go/util"
+	"github.com/qingcc/blog_go/model"
+	"github.com/qingcc/blog_go/util"
 )
 
 type ChatLogic struct{}

@@ -1,16 +1,16 @@
 package background
 
 import (
-	"blog_go/config"
-	"blog_go/databases"
+	"github.com/qingcc/blog_go/config"
+	"github.com/qingcc/blog_go/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/polaris1119/logger"
-	"blog_go/logic"
-	"blog_go/model"
+	"github.com/qingcc/blog_go/logic"
+	"github.com/qingcc/blog_go/model"
 	"net/http"
 	"strconv"
-	"blog_go/util"
+	"github.com/qingcc/blog_go/util"
 )
 
 type SendData struct {

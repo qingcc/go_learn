@@ -1,4 +1,4 @@
-module blog_go
+module github.com/qingcc/blog_go
 
 go 1.13
 

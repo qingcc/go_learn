@@ -1,17 +1,17 @@
 package background
 
 import (
-	"blog_go/config"
-	"blog_go/databases"
+	"github.com/qingcc/blog_go/config"
+	"github.com/qingcc/blog_go/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	uuid2 "github.com/satori/go.uuid"
 	"io/ioutil"
-	"blog_go/model"
+	"github.com/qingcc/blog_go/model"
 	"net/http"
 	"os"
 	"time"
-	"blog_go/util"
+	"github.com/qingcc/blog_go/util"
 )
 
 //region Remark: 初始化数据 Author:Qing

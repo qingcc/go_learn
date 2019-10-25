@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"blog_go/routers"
+	"github.com/qingcc/blog_go/routers"
 )
 
 func main() {

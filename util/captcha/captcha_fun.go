@@ -1,7 +1,7 @@
 package captcha
 
 import (
-	"blog_go/util"
+	"github.com/qingcc/blog_go/util"
 	"github.com/gin-gonic/gin"
 	"strconv"
 )

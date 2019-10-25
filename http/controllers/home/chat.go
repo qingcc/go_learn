@@ -1,16 +1,16 @@
 package home
 
 import (
-	"blog_go/config"
-	"blog_go/databases"
+	"github.com/qingcc/blog_go/config"
+	"github.com/qingcc/blog_go/databases"
 	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
-	"blog_go/logic"
-	"blog_go/model"
+	"github.com/qingcc/blog_go/logic"
+	"github.com/qingcc/blog_go/model"
 	"net/http"
 	"strconv"
 	"strings"
-	"blog_go/util"
+	"github.com/qingcc/blog_go/util"
 )
 
 func Chat(c *gin.Context) {

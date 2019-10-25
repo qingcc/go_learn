@@ -1,7 +1,7 @@
 package model
 
 import (
-	"blog_go/databases"
+	"github.com/qingcc/blog_go/databases"
 	"fmt"
 	"time"
 )
