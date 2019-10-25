@@ -1,13 +1,13 @@
 package routers
 
 import (
-	"github.com/qingcc/blog_go/databases"
+	"blog_go/databases"
 	"github.com/foolin/gin-template"
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	//_ "github.com/go-sql-driver/mysql"
-	"github.com/qingcc/blog_go/http/controllers/background"
-	"github.com/qingcc/blog_go/http/middleware"
+	"blog_go/http/controllers/background"
+	"blog_go/http/middleware"
 )
 
 func InitBackGroundRouter() *gin.Engine {

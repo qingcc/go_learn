@@ -3,7 +3,7 @@ package model
 import (
 	"fmt"
 	"time"
-	"github.com/qingcc/blog_go/util"
+	"blog_go/util"
 )
 
 type User struct {

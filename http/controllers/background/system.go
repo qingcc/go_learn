@@ -1,10 +1,10 @@
 package background
 
 import (
-	"github.com/qingcc/blog_go/config"
+	"blog_go/config"
 	"github.com/gin-gonic/gin"
-	"github.com/qingcc/blog_go/logic"
-	"github.com/qingcc/blog_go/model"
+	"blog_go/logic"
+	"blog_go/model"
 	"net/http"
 )
 

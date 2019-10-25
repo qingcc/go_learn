@@ -4,14 +4,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/satori/go.uuid"
 	"io"
-	"github.com/qingcc/blog_go/logic"
+	"blog_go/logic"
 	"net/http"
 	"os"
 	"runtime"
 	"strconv"
 	"strings"
 	"time"
-	"github.com/qingcc/blog_go/util"
+	"blog_go/util"
 )
 
 //region Remark: 上传 Author:Qing

@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
-	"github.com/qingcc/blog_go/util"
+	"blog_go/util"
 )
 
 //region Remark: 主页 Author:Qing

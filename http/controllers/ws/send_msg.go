@@ -3,7 +3,7 @@ package ws
 import (
 	"fmt"
 	"github.com/gorilla/websocket"
-	"github.com/qingcc/blog_go/logic"
+	"blog_go/logic"
 )
 
 var (

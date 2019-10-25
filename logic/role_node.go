@@ -1,9 +1,9 @@
 package logic
 
 import (
-	"github.com/qingcc/blog_go/databases"
+	"blog_go/databases"
 	"github.com/gin-gonic/gin"
-	"github.com/qingcc/blog_go/model"
+	"blog_go/model"
 )
 
 type RoleNodeLogic struct{}
