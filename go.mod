@@ -27,6 +27,7 @@ require (
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
 	github.com/stretchr/testify v1.4.0
+	github.com/typa01/go-utils v0.0.0-20181126045345-a86b05b01c1e // indirect
 	github.com/ziutek/mymysql v1.5.4
 	xorm.io/core v0.7.0
 )

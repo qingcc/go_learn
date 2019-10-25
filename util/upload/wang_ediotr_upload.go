@@ -2,16 +2,16 @@ package util
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/satori/go.uuid"
-	"io"
 	"github.com/qingcc/go_learn/logic"
+	"github.com/qingcc/go_learn/util"
+	tsgutils "github.com/typa01/go-utils"
+	"io"
 	"net/http"
 	"os"
 	"runtime"
 	"strconv"
 	"strings"
 	"time"
-	"github.com/qingcc/go_learn/util"
 )
 
 //region Remark: 上传 Author:Qing
@@ -38,8 +38,8 @@ func wang_editor_upload(c *gin.Context, fileName string, fileType string, suffix
 		}
 		filename := strings.Split(files[i].Filename, ".")
 		filename_suffix := filename[len(filename)-1]
-		uid := uuid.NewV4()
-		new_filename := uid.String() + "." + filename_suffix
+		uid := tsgutils.GUID()
+		new_filename := uid + "." + filename_suffix
 
 		//判断文件后缀是否允许上传
 		if !strings.Contains(suffix, filename_suffix) {

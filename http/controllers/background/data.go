@@ -1,17 +1,17 @@
 package background
 
 import (
-	"github.com/qingcc/go_learn/config"
-	"github.com/qingcc/go_learn/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	uuid2 "github.com/satori/go.uuid"
-	"io/ioutil"
+	"github.com/qingcc/go_learn/config"
+	"github.com/qingcc/go_learn/databases"
 	"github.com/qingcc/go_learn/model"
+	"github.com/qingcc/go_learn/util"
+	tsgutils "github.com/typa01/go-utils"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"time"
-	"github.com/qingcc/go_learn/util"
 )
 
 //region Remark: 初始化数据 Author:Qing
@@ -76,13 +76,13 @@ func BackUpList(c *gin.Context) {
 
 //region Remark: 备份数据 Author; chijian
 func BackUp(c *gin.Context) {
-	uuid := uuid2.NewV4()
-	file := "./uploads/backup/" + uuid.String() + "_" + time.Now().Format("2006_01_02_15_04_05") + ".sql"
+	uuid := tsgutils.GUID()
+	file := "./uploads/backup/" + uuid + "_" + time.Now().Format("2006_01_02_15_04_05") + ".sql"
 	databases.Orm.DumpAllToFile(file)
 	f1, err := os.Open(file)
 	fmt.Println(err)
 	var files = []*os.File{f1}
-	fileZip := "./uploads/backup/" + uuid.String() + "_" + time.Now().Format("2006_01_02_15_04_05") + ".zip"
+	fileZip := "./uploads/backup/" + uuid + "_" + time.Now().Format("2006_01_02_15_04_05") + ".zip"
 	util.Zip(files, fileZip)
 	os.Remove(file)
 	c.JSON(http.StatusOK, gin.H{

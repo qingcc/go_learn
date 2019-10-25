@@ -15,6 +15,7 @@ var wsupgrader = websocket.Upgrader{
 		return true
 	},
 }
+var client = make(map[string]*websocket.Conn)
 
 func Wshandler(c *gin.Context) {
 	user_id := c.Param("keyid")
@@ -24,7 +25,7 @@ func Wshandler(c *gin.Context) {
 		fmt.Println("failed to set websocket upgrade %+v", err)
 		return
 	}
-	//client[user_id] = ws
+	client[user_id] = ws
 	util.AddWsLinksToRedis(user_id)
 	addUser <- map[string]int{user_id: 1}
 }
