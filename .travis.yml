@@ -11,6 +11,6 @@ env:
           - GO111MODULE=on
           - GOPROXY=https://proxy.golang.org
           - GOARCH=amd64
-       
+        install: true       
 
 
