@@ -1,18 +1,18 @@
 package util
 
 import (
-	"blog_go/config"
+	"github.com/qingcc/go_learn/config"
 	"github.com/gin-gonic/gin"
 	"github.com/satori/go.uuid"
 	"io"
-	"blog_go/logic"
+	"github.com/qingcc/go_learn/logic"
 	"net/http"
 	"os"
 	"runtime"
 	"strconv"
 	"strings"
 	"time"
-	"blog_go/util"
+	"github.com/qingcc/go_learn/util"
 )
 
 //region Remark: 上传 Author:Qing

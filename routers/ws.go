@@ -1,9 +1,9 @@
 package routers
 
 import (
-	"blog_go/databases"
+	"github.com/qingcc/go_learn/databases"
 	"github.com/gin-gonic/gin"
-	"blog_go/http/controllers/ws"
+	"github.com/qingcc/go_learn/http/controllers/ws"
 )
 
 func InitWsRouter() *gin.Engine {

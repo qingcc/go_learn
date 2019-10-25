@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"blog_go/databases"
+	"github.com/qingcc/go_learn/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"blog_go/model"
+	"github.com/qingcc/go_learn/model"
 )
 
 type RoleNodeRoutesLogic struct{}

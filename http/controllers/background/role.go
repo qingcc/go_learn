@@ -1,17 +1,17 @@
 package background
 
 import (
-	"blog_go/config"
-	"blog_go/databases"
+	"github.com/qingcc/go_learn/config"
+	"github.com/qingcc/go_learn/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	//"github.com/polaris1119/logger"
 	"github.com/polaris1119/logger"
-	"blog_go/logic"
-	"blog_go/model"
+	"github.com/qingcc/go_learn/logic"
+	"github.com/qingcc/go_learn/model"
 	"net/http"
 	"strconv"
-	"blog_go/util"
+	"github.com/qingcc/go_learn/util"
 )
 
 //region Remark: 管理员角色列表 Author:Qing

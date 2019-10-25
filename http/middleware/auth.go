@@ -1,12 +1,12 @@
 package middleware
 
 import (
-	"blog_go/config"
+	"github.com/qingcc/go_learn/config"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"blog_go/logic"
+	"github.com/qingcc/go_learn/logic"
 	"net/http"
-	"blog_go/util"
+	"github.com/qingcc/go_learn/util"
 )
 
 func Auth() gin.HandlerFunc {

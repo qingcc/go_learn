@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"blog_go/databases"
+	"github.com/qingcc/go_learn/databases"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
-	"blog_go/model"
+	"github.com/qingcc/go_learn/model"
 )
 
 type AdminNavigationNodeLogic struct{}

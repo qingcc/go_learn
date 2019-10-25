@@ -1,14 +1,14 @@
 package logic
 
 import (
-	"blog_go/databases"
+	"github.com/qingcc/go_learn/databases"
 	"encoding/json"
 	"fmt"
 	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
-	"blog_go/model"
+	"github.com/qingcc/go_learn/model"
 	"strconv"
-	"blog_go/util"
+	"github.com/qingcc/go_learn/util"
 )
 
 type AdminLogic struct{}
