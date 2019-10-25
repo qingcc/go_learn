@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"os"
 	"time"
-	"github.com/qingcc/go_learn/util"
+	"github.com/qingcc/goblog/util"
 )
 
 //region Remark: 将请求的日志记录并保存下来 Author; chijian

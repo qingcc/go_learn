@@ -2,7 +2,7 @@ package logic
 
 import (
 	//"github.com/polaris1119/logger"
-	"github.com/qingcc/go_learn/model"
+	"github.com/qingcc/goblog/model"
 )
 
 var (

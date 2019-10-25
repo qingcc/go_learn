@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"crypto/md5"
 	rand2 "crypto/rand"
-	"github.com/qingcc/go_learn/databases"
+	"github.com/qingcc/goblog/databases"
 	"encoding/base64"
 	"encoding/hex"
 	"encoding/json"

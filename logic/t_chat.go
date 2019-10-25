@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"github.com/qingcc/go_learn/databases"
+	"github.com/qingcc/goblog/databases"
 	"github.com/gin-gonic/gin"
-	"github.com/qingcc/go_learn/model"
-	"github.com/qingcc/go_learn/util"
+	"github.com/qingcc/goblog/model"
+	"github.com/qingcc/goblog/util"
 )
 
 type TChatLogic struct{}

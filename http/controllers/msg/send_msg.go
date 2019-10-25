@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/websocket"
-	"github.com/qingcc/go_learn/logic"
+	"github.com/qingcc/goblog/logic"
 	"net"
 )
 

@@ -2,9 +2,9 @@ package util
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/qingcc/go_learn/config"
-	"github.com/qingcc/go_learn/logic"
-	"github.com/qingcc/go_learn/util"
+	"github.com/qingcc/goblog/config"
+	"github.com/qingcc/goblog/logic"
+	"github.com/qingcc/goblog/util"
 	tsgutils "github.com/typa01/go-utils"
 	"io"
 	"net/http"

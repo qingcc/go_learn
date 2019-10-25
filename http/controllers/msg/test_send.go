@@ -2,7 +2,7 @@ package ws
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/qingcc/go_learn/logic"
+	"github.com/qingcc/goblog/logic"
 )
 
 func Send(c *gin.Context) {

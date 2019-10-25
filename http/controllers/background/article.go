@@ -1,15 +1,15 @@
 package background
 
 import (
-	"github.com/qingcc/go_learn/config"
-	"github.com/qingcc/go_learn/databases"
+	"github.com/qingcc/goblog/config"
+	"github.com/qingcc/goblog/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	//"github.com/polaris1119/logger"
 	"github.com/polaris1119/logger"
 	"html/template"
-	"github.com/qingcc/go_learn/logic"
-	"github.com/qingcc/go_learn/model"
+	"github.com/qingcc/goblog/logic"
+	"github.com/qingcc/goblog/model"
 	"net/http"
 	"strconv"
 )

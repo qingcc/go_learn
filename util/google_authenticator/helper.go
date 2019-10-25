@@ -7,7 +7,7 @@ import (
 	"image/png"
 	"os"
 	"time"
-	"github.com/qingcc/go_learn/util"
+	"github.com/qingcc/goblog/util"
 )
 
 type GoogleAuthInfo struct {

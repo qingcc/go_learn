@@ -7,7 +7,7 @@
 package home
 
 import (
-	"github.com/qingcc/go_learn/logic"
+	"github.com/qingcc/goblog/logic"
 	"net/http"
 	"net/url"
 	"strconv"

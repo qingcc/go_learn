@@ -1,10 +1,10 @@
 package background
 
 import (
-	"github.com/qingcc/go_learn/config"
+	"github.com/qingcc/goblog/config"
 	"github.com/gin-gonic/gin"
-	"github.com/qingcc/go_learn/logic"
-	"github.com/qingcc/go_learn/model"
+	"github.com/qingcc/goblog/logic"
+	"github.com/qingcc/goblog/model"
 	"net/http"
 )
 

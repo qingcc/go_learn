@@ -1,11 +1,11 @@
 package model
 
 import (
-	"github.com/qingcc/go_learn/databases"
+	"github.com/qingcc/goblog/databases"
 	"fmt"
 	"github.com/go-xorm/xorm"
 	"time"
-	"github.com/qingcc/go_learn/util"
+	"github.com/qingcc/goblog/util"
 )
 
 type CoinPrice1Min struct {
