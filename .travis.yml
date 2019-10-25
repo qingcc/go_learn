@@ -12,10 +12,11 @@ env:
           - GOPROXY=https://proxy.golang.org
           - GOARCH=amd64
 before_install:
-  - if [[ "${GO111MODULE}" = "on" ]]; then mkdir "${HOME}/go"; export GOPATH="${HOME}/go"; fi
+  mkdir "${HOME}/go"
+  export GOPATH="${HOME}/go"
 
 install:
-  - if [[ "${GO111MODULE}" = "on" ]]; then go mod download; else make install; fi
-  - if [[ "${GO111MODULE}" = "on" ]]; then export PATH="${GOPATH}/bin:${GOROOT}/bin:${PATH}"; fi
-  - if [[ "${GO111MODULE}" = "on" ]]; then make tools; fi
+  go mod download & make install
+  export PATH="${GOPATH}/bin:${GOROOT}/bin:${PATH}"
+  make tools
 
