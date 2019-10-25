@@ -45,7 +45,7 @@ func (self ChatLogic) FindOneChat(field string, val interface{}) *model.Chat {
 	item := &model.Chat{}
 	_, err := databases.Orm.Where(field+"= ?", val).Get(item)
 	if err != nil {
-		fmt.Errorf("RoleLogic find errof:", err)
+		fmt.Println("RoleLogic find errof:", err)
 	}
 
 	return item

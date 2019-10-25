@@ -22,7 +22,7 @@ func Wshandler(c *gin.Context) {
 
 	ws, err := wsupgrader.Upgrade(c.Writer, c.Request, nil)
 	if err != nil {
-		fmt.Println("failed to set websocket upgrade %+v", err)
+		fmt.Println("failed to set websocket upgrade ", err)
 		return
 	}
 	client[user_id] = ws
