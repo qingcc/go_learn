@@ -3,3 +3,4 @@
 config/
 config/db.ini
 uploads/
+.gitignore
