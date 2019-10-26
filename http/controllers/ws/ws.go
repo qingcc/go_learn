@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"net/http"
 	"github.com/qingcc/goblog/util"
+	"net/http"
 )
 
 var wsupgrader = websocket.Upgrader{

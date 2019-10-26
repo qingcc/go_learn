@@ -1,8 +1,8 @@
 package util
 
 import (
-	"github.com/qingcc/goblog/databases"
 	"github.com/garyburd/redigo/redis"
+	"github.com/qingcc/goblog/databases"
 )
 
 /**

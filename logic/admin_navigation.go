@@ -1,15 +1,15 @@
 package logic
 
 import (
-	"github.com/qingcc/goblog/databases"
 	"encoding/json"
 	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
+	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/model"
-	"strings"
 	"github.com/qingcc/goblog/util"
+	"strings"
 )
 
 type AdminNavigationLogic struct{}

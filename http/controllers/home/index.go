@@ -1,15 +1,15 @@
 package home
 
 import (
-	"github.com/qingcc/goblog/config"
-	"github.com/qingcc/goblog/databases"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/qingcc/goblog/config"
+	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/logic"
 	"github.com/qingcc/goblog/model"
+	"github.com/qingcc/goblog/util"
 	"net/http"
 	"time"
-	"github.com/qingcc/goblog/util"
 )
 
 func Reg(c *gin.Context) {
@@ -34,7 +34,6 @@ func PutLogin(c *gin.Context) {
 	return
 
 }
-
 
 func DeleteLogin(c *gin.Context) {
 	mul := c.Param("name")

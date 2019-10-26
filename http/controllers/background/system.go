@@ -1,8 +1,8 @@
 package background
 
 import (
-	"github.com/qingcc/goblog/config"
 	"github.com/gin-gonic/gin"
+	"github.com/qingcc/goblog/config"
 	"github.com/qingcc/goblog/logic"
 	"github.com/qingcc/goblog/model"
 	"net/http"

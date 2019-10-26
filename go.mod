@@ -18,6 +18,7 @@ require (
 	github.com/go-xorm/xorm v0.7.6
 	github.com/golang/crypto v0.0.0-20180820150726-614d502a4dac // indirect
 	github.com/golang/net v0.0.0-20180826012351-8a410e7b638d // indirect
+	github.com/golang/protobuf v1.3.1
 	github.com/golang/text v0.3.0 // indirect
 	github.com/gorilla/sessions v1.2.0 // indirect
 	github.com/gorilla/websocket v1.4.1
@@ -27,7 +28,7 @@ require (
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
 	github.com/stretchr/testify v1.4.0
-	github.com/typa01/go-utils v0.0.0-20181126045345-a86b05b01c1e // indirect
+	github.com/typa01/go-utils v0.0.0-20181126045345-a86b05b01c1e
 	github.com/ziutek/mymysql v1.5.4
 	xorm.io/core v0.7.0
 )

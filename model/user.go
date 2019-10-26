@@ -2,8 +2,8 @@ package model
 
 import (
 	"fmt"
-	"time"
 	"github.com/qingcc/goblog/util"
+	"time"
 )
 
 type User struct {

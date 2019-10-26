@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"github.com/boombuler/barcode"
 	"github.com/boombuler/barcode/qr"
+	"github.com/qingcc/goblog/util"
 	"image/png"
 	"os"
 	"time"
-	"github.com/qingcc/goblog/util"
 )
 
 type GoogleAuthInfo struct {

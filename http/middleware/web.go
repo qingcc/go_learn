@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/qingcc/goblog/util"
 	"io/ioutil"
 	"net/url"
 	"os"
 	"time"
-	"github.com/qingcc/goblog/util"
 )
 
 //region Remark: 将请求的日志记录并保存下来 Author; chijian
