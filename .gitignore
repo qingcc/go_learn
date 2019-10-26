@@ -1,5 +1,5 @@
 .idea
 .git
-config
+config/
 config/db.ini
-uploads
+uploads/
