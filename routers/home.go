@@ -7,7 +7,6 @@ import (
 	"github.com/qingcc/goblog/databases"
 
 	"github.com/qingcc/goblog/http/controllers/home"
-	"github.com/qingcc/goblog/http/middleware/home"
 )
 
 func InitHomeRouter() *gin.Engine {
@@ -26,23 +25,22 @@ func InitHomeRouter() *gin.Engine {
 		DisableCache: true,
 	})
 	//router.Use(middleware.Web("background"))
-	router.GET("/login", home.GetLogin)
-	router.PUT("/login", home.PutLogin)
-	router.DELETE("/login", home.DeleteLogin)
-	router.POST("/login", home.PostLogin)
-	router.GET("/reg", home.Reg)
-	router.POST("/reg", home.PostReg)
-	//router.GET("/captcha", controllers.Catpcha)
-	router.GET("/user/chat", home.Chat)
-	router.GET("/user/t_chat", home.WsChat) //websocket
+	//router.GET("/login", home.GetLogin)
+	//router.POST("/login", home.PostLogin)
+	//router.GET("/reg", home.Reg)
+	//router.POST("/reg", home.PostReg)
+	////router.GET("/captcha", controllers.Catpcha)
+	//router.GET("/user/chat", home.Chat)
+	//router.GET("/user/t_chat", home.WsChat) //websocket
 
-	router.GET("/blog_list", home.ArticleList)
+	router.GET("/", home.Index)
+	router.GET("/detail", home.ArticleDetail)
 
-	user := router.Group("/user", middlewares.CheckLogin())
-	//user.GET("/center", background.GetCenter)
-
-	user.POST("/to_chat", home.PostChat)
-	user.POST("/get_data", home.GetData)
+	//user := router.Group("/user", middlewares.CheckLogin())
+	////user.GET("/center", background.GetCenter)
+	//
+	//user.POST("/to_chat", home.PostChat)
+	//user.POST("/get_data", home.GetData)
 
 	return router
 }

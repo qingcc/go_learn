@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/model"
+	"strings"
 )
 
 type ArticleLogic struct{}
@@ -36,6 +37,27 @@ func (self ArticleLogic) List(c *gin.Context) []*model.Article {
 
 //endregion
 
+func (self ArticleLogic) All(c *gin.Context) []map[string]interface{} {
+	objLog := GetLogger(c)
+	data := make([]*model.Article, 0)
+	err := databases.Orm.Table("article").Desc("id").Find(&data)
+	if err != nil {
+		objLog.Errorf("CategoryLogic find errof:", err)
+		return nil
+	}
+	list := make([]map[string]interface{}, len(data))
+	for key, value := range data {
+		item := make(map[string]interface{})
+		item["title"] = value.Title
+		item["time"] = value.CreatedAt.Format("2006-01-02 15:04")
+		item["img"] = value.Cover
+		item["abstract"] = value.Abstract
+		item["tags"] = strings.Split(value.Tags, ",")
+		list[key] = item
+	}
+	return list
+}
+
 //region Remark: 获取一条数据 Author:Qing
 func (self ArticleLogic) FindOne(c *gin.Context, field string, val interface{}) (*model.Article, error) {
 	objLog := GetLogger(c)
@@ -45,7 +67,7 @@ func (self ArticleLogic) FindOne(c *gin.Context, field string, val interface{}) 
 	if err != nil {
 		objLog.Errorf("CategoryLogic find errof:", err)
 	}
-	if ok != true {
+	if !ok {
 		return nil, err
 	}
 	return item, err

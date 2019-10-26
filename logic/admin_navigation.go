@@ -22,9 +22,10 @@ func (self AdminNavigationLogic) DataList(c *gin.Context) []*model.AdminNavigati
 	navigation := make([]*model.AdminNavigation, 0)
 
 	var redis_key string = "admin:navigation:list"
-	if res, _ := util.Exists(redis_key); res == true {
+	if res, _ := util.Exists(redis_key); res {
 		valueBytes, _ := redis.Bytes(util.Get(redis_key))
-		json.Unmarshal(valueBytes, &navigation)
+		err := json.Unmarshal(valueBytes, &navigation)
+		util.CheckErr(err)
 		return navigation
 	} else {
 		fmt.Println("do not have session")

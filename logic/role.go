@@ -1,10 +1,10 @@
 package logic
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/model"
+	"github.com/qingcc/goblog/util"
 )
 
 type RoleLogic struct{}
@@ -60,11 +60,12 @@ func (self RoleLogic) RoleHasAdmin(c *gin.Context, id int64, ids []string) bool 
 	objLog := GetLogger(c)
 
 	has1, err := databases.Orm.Table("admin").In("role_id", ids).Count()
+	util.CheckErr(err)
 	has2, err := databases.Orm.Table("admin").Where("role_id = ?", id).Count()
 	if err != nil {
 		objLog.Errorf("AdminLogic find errof:", err)
 	}
-	fmt.Println(has1, has2)
+
 	if has1 > 0 || has2 > 0 {
 		return true
 	}

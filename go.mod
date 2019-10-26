@@ -12,6 +12,7 @@ require (
 	github.com/gin-gonic/contrib v0.0.0-20190923054218-35076c1b2bea
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-ini/ini v1.49.0
+	github.com/go-redis/redis v6.15.6+incompatible // indirect
 	github.com/go-xorm/builder v0.3.4 // indirect
 	github.com/go-xorm/core v0.0.0-20180322150003-0177c08cee88
 	//github.com/go-xorm/xorm v0.7.9 // indirect

@@ -5,6 +5,8 @@ import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/databases"
+	util "github.com/qingcc/goblog/util/upload"
+
 	//_ "github.com/go-sql-driver/mysql"
 	"github.com/qingcc/goblog/http/controllers/background"
 	"github.com/qingcc/goblog/http/middleware"
@@ -39,10 +41,10 @@ func InitBackGroundRouter() *gin.Engine {
 	v1.GET("/clear", background.Clear)
 	v1.GET("/logout", background.Logout)
 	v1.GET("/icon/list", background.Icon)
-	//v1.POST("/upload/controllers/image", util.WangEditorUpload)
-	//v1.POST("/upload/image", util.UploadImage)
-	//v1.POST("/upload/file", util.UploadFile)
-	//v1.POST("/upload/video", util.UploadVideo)
+	v1.POST("/upload/controllers/image", util.WangEditorUpload)
+	v1.POST("/upload/image", util.UploadImage)
+	v1.POST("/upload/file", util.UploadFile)
+	v1.POST("/upload/video", util.UploadVideo)
 
 	//数据备份
 	v1.GET("/backup/list", background.BackUpList)

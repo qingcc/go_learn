@@ -1,10 +1,13 @@
 package logic
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/model"
+	"github.com/qingcc/goblog/util"
 	"strings"
 )
 
@@ -14,13 +17,22 @@ var DefaultCategory = CategoryLogic{}
 
 //region Remark: 列表 Author:Qing
 func (self CategoryLogic) List(c *gin.Context) []*model.Category {
-	objLog := GetLogger(c)
+	redis_string := "categories:list"
 	data := make([]*model.Category, 0)
-	err := databases.Orm.Find(&data)
-	if err != nil {
-		objLog.Errorf("CategoryLogic find errof:", err)
-		return nil
+	if ok, _ := util.Exists(redis_string); !ok {
+		objLog := GetLogger(c)
+		err := databases.Orm.Desc("id").Find(&data)
+		if err != nil {
+			objLog.Errorf("CategoryLogic find errof:", err)
+			return nil
+		}
+		byte, _ := json.Marshal(data)
+		util.Set(redis_string, string(byte), -1)
+	} else {
+		rep, _ := redis.Bytes(util.Get(redis_string))
+		json.Unmarshal(rep, &data)
 	}
+
 	return data
 }
 
@@ -28,15 +40,24 @@ func (self CategoryLogic) List(c *gin.Context) []*model.Category {
 
 //region Remark: 获取分类列表 Author:Qing
 func (self CategoryLogic) LevelList(c *gin.Context) []*model.Category {
-	objLog := GetLogger(c)
-	data := make([]*model.Category, 0)
-	err := databases.Orm.Asc("pid").Asc("sort").Find(&data)
-	if err != nil {
-		objLog.Errorf("CategoryLogic find errof:", err)
-	}
+	redis_string := "categories:list"
+	showList := make([]*model.Category, 0)
+	if ok, _ := util.Exists(redis_string); !ok {
+		objLog := GetLogger(c)
+		data := make([]*model.Category, 0)
+		err := databases.Orm.Asc("pid").Asc("sort").Find(&data)
+		if err != nil {
+			objLog.Errorf("CategoryLogic find errof:", err)
+		}
 
-	showList := make([]*model.Category, 0, len(data))
-	self.Data2List(&showList, data, 0, 1, 0, "|-")
+		showList := make([]*model.Category, 0, len(data))
+		self.Data2List(&showList, data, 0, 1, 0, "|-")
+		bytes, _ := json.Marshal(showList)
+		util.Set(redis_string, string(bytes), -1)
+	} else {
+		rep, _ := redis.Bytes(util.Get(redis_string))
+		json.Unmarshal(rep, &showList)
+	}
 	return showList
 }
 
@@ -67,7 +88,7 @@ func (self CategoryLogic) FindOne(c *gin.Context, field string, val interface{})
 	if err != nil {
 		objLog.Errorf("CategoryLogic find errof:", err)
 	}
-	if ok != true {
+	if !ok {
 		return nil, err
 	}
 	return item, err
@@ -80,6 +101,7 @@ func (self CategoryLogic) RoleHasAdmin(c *gin.Context, id int64, ids []string) b
 	objLog := GetLogger(c)
 
 	has1, err := databases.Orm.Table("admin").In("role_id", ids).Count()
+	util.CheckErr(err)
 	has2, err := databases.Orm.Table("admin").Where("role_id = ?", id).Count()
 	if err != nil {
 		objLog.Errorf("CategoryLogic find errof:", err)

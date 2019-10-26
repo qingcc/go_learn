@@ -24183,7 +24183,7 @@ UE.plugin.register('section', function (){
             'keyup': function (type, e) {
                 var me = this,
                     range = me.selection.getRange();
-                if(range.collapsed != true) {
+                if !range.collapsed {
                     me.fireEvent('updateSections');
                 } else {
                     var keyCode = e.keyCode || e.which;

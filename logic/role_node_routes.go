@@ -55,7 +55,7 @@ func (self RoleNodeRoutesLogic) FindOne(c *gin.Context, field string, val interf
 		objLog.Errorf("RoleNodeRoutesLogic find errof:", err)
 		return nil
 	}
-	if res == false {
+	if !res {
 		return nil
 	}
 	return route

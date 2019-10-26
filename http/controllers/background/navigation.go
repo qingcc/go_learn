@@ -190,7 +190,7 @@ func PostNavigationEdit(c *gin.Context) {
 		})
 		return
 	}
-	if res != true {
+	if !res {
 		db.Rollback()
 		fmt.Println(err.Error())
 		c.JSON(http.StatusOK, gin.H{

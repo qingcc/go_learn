@@ -5,6 +5,7 @@ import (
 	"github.com/go-xorm/xorm"
 	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/model"
+	"github.com/qingcc/goblog/util"
 )
 
 type AdminNavigationNodeLogic struct{}
@@ -14,7 +15,8 @@ var DefaultAdminNavigationNode = AdminNavigationNodeLogic{}
 //region Remark: 列表 Author:Qing
 func (self AdminNavigationNodeLogic) GetAllNavigationIds(db *xorm.Session, id int64, ids []int64) []int64 {
 	admin_navigation := new(model.AdminNavigation)
-	db.Id(id).Get(admin_navigation)
+	_, err := db.Id(id).Get(admin_navigation)
+	util.CheckErr(err)
 	if admin_navigation.ParentId > 0 {
 		ids = append(ids, admin_navigation.Id)
 		return self.GetAllNavigationIds(db, admin_navigation.ParentId, ids)

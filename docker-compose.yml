@@ -1,12 +1,7 @@
 version: "3"
 
 services:
-        db:
-                image: postgres:latest
-                environment:
-                        POSTGRES_USER: postgres
-                        POSTGRES_PASSWORD: yi2009
-                ports:
-                        - 5432:5432 //映射端口
+        nginx:
+                image: nginx:latest
                 volumes:
-                        - ./postgres-data:/varlib/postgresql/data
+                        - ./config/nginx.conf:/etc/docker/nginx

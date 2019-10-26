@@ -57,9 +57,10 @@ func (self AdminLogic) AdminNowLoginInfo(c *gin.Context) *model.Admin {
 	var adminid int64 = (util.GetSession(c, "adminid")).(int64)
 	//缓存数据到redis
 	redis_key := "admin:info:" + strconv.FormatInt(adminid, 10)
-	if res, _ := util.Exists(redis_key); res == true {
+	if res, _ := util.Exists(redis_key); res {
 		valueBytes, _ := redis.Bytes(util.Get(redis_key))
-		json.Unmarshal(valueBytes, &admin)
+		err := json.Unmarshal(valueBytes, &admin)
+		util.CheckErr(err)
 	} else {
 		admin = DefaultAdmin.GetAdminByField(c, "id", adminid)
 		role, _ := DefaultRole.FindOne(c, "id", admin.RoleId)

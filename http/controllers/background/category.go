@@ -5,6 +5,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/config"
 	"github.com/qingcc/goblog/databases"
+	"github.com/qingcc/goblog/util"
+
 	//"github.com/polaris1119/logger"
 	"github.com/polaris1119/logger"
 	"github.com/qingcc/goblog/logic"
@@ -52,6 +54,7 @@ func PostCateAdd(c *gin.Context) {
 		fmt.Println(err.Error())
 	}
 	if has > 0 {
+		util.DelKeyByPrefix("categories:")
 		c.JSON(http.StatusOK, gin.H{
 			"status": config.HttpSuccess,
 			"msg":    "新增分类成功",
@@ -115,6 +118,7 @@ func PostCateEdit(c *gin.Context) {
 		})
 		return
 	}
+	util.DelKeyByPrefix("categories:")
 	c.JSON(http.StatusOK, gin.H{
 		"status": config.HttpError,
 		"msg":    "更新失败",
@@ -154,6 +158,7 @@ func PostCateDel(c *gin.Context) {
 		})
 		return
 	}
+	util.DelKeyByPrefix("categories:")
 	c.JSON(http.StatusOK, gin.H{
 		"status": config.HttpSuccess,
 		"msg":    "删除成功",
@@ -178,6 +183,7 @@ func PostCateSort(c *gin.Context) {
 		})
 		return
 	}
+	util.DelKeyByPrefix("categories:")
 	c.JSON(http.StatusOK, gin.H{
 		"status": config.HttpSuccess,
 		"msg":    "操作成功",
