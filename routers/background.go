@@ -100,8 +100,8 @@ func InitBackGroundRouter() *gin.Engine {
 	v1.GET("/article/edit", background.GetArticleEdit)
 	v1.POST("/article/edit", background.PostArticleEdit)
 	//v1.POST("/article/del", background.PostArticleDel)
-	v1.POST("/article/sort", background.PostArticleSort)
-	v1.POST("/article/del", new(background.ArticleController).Del)
+	//v1.POST("/article/sort", background.PostArticleSort)
+	//v1.POST("/article/del", new(background.ArticleController).Del)
 
 	return router
 }

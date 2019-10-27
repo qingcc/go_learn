@@ -8,6 +8,8 @@ import (
 	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/model"
 	"github.com/qingcc/goblog/util"
+	redisPool "github.com/qingcc/goblog/util/redis"
+	"strconv"
 	"strings"
 )
 
@@ -113,4 +115,60 @@ func (self CategoryLogic) RoleHasAdmin(c *gin.Context, id int64, ids []string) b
 	return false
 }
 
-//endregion
+//region Remark:递归取出无限级联
+func GetCategoryByParentId(parent_id int64) *[]model.Category {
+	data := new([]model.Category)
+	err := databases.Orm.Where("pid = ?", parent_id).Desc("id").Find(data)
+	if err != nil {
+		fmt.Println(err.Error())
+	}
+	return data
+}
+
+func GetAllCategory(parent_id int64) []map[string]interface{} {
+	data := GetCategoryByParentId(parent_id)
+	list := make([]map[string]interface{}, 0)
+	for _, value := range *data {
+		item := make(map[string]interface{})
+		item["id"] = value.Id
+		item["title"] = value.Title
+		item["num"] = GetArticleNum(value.Id)
+		son := GetCategoryByParentId(value.Id)
+		if len(*son) != 0 {
+			_list := GetAllCategory(value.Id) //获取所有的同级分类放入一个切片中
+			item["child"] = _list             //将该切片塞入父级的 'child' 字段中
+			item["has_child"] = true
+		} else {
+			item["has_child"] = false
+		}
+		list = append(list, item) //将同级分类数据 append 到一个切片中
+	}
+	return list
+}
+
+func GetArticleNum(category_id int64) int64 {
+	redis_key := "article_category_num:" + strconv.FormatInt(category_id, 10)
+	if ok, _ := redisPool.Exists(redis_key); ok {
+		n, _ := redis.String(redisPool.Get(redis_key))
+		num, _ := strconv.ParseInt(n, 10, 64)
+		return num
+	} else {
+		ids := append(getCategoryIds(category_id), category_id)
+		num, _ := databases.Orm.Table("article").In("category_id", ids).Count()
+		redisPool.Set(redis_key, num, -1)
+		return num
+	}
+}
+
+func getCategoryIds(category_id int64) []int64 {
+	ids := make([]int64, 0)
+	err := databases.Orm.Table("category").Where("pid = ?", category_id).Cols("id").Find(&ids)
+	util.CheckErr(err)
+	if len(ids) == 0 {
+		return ids
+	}
+	for _, id := range ids {
+		ids = append(ids, getCategoryIds(id)...)
+	}
+	return ids
+}

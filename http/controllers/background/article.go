@@ -5,6 +5,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/config"
 	"github.com/qingcc/goblog/databases"
+	redisPool "github.com/qingcc/goblog/util/redis"
+
 	//"github.com/polaris1119/logger"
 	"github.com/polaris1119/logger"
 	"github.com/qingcc/goblog/logic"
@@ -35,7 +37,7 @@ func GetArticleAdd(c *gin.Context) {
 func PostArticleAdd(c *gin.Context) {
 	title := c.PostForm("title")
 	abstract := c.PostForm("abstract")
-	author := c.PostForm("author")
+	//author := c.PostForm("author")
 	cover := c.PostForm("cover")
 	tags := c.PostForm("tags")
 	sources := c.PostForm("sources")
@@ -73,10 +75,10 @@ func PostArticleAdd(c *gin.Context) {
 	}
 
 	has, err := databases.Orm.Insert(&model.Article{
-		Title:         title,
-		Abstract:      abstract,
-		CategoryId:    category_id,
-		Author:        author,
+		Title:      title,
+		Abstract:   abstract,
+		CategoryId: category_id,
+		//Author:        author,
 		Cover:         cover,
 		Tags:          tags,
 		Sources:       sources,
@@ -89,6 +91,7 @@ func PostArticleAdd(c *gin.Context) {
 		fmt.Println(err.Error())
 	}
 	if has > 0 {
+		redisPool.DelKeyByPrefix("article_category_num:")
 		c.JSON(http.StatusOK, gin.H{
 			"status": config.HttpSuccess,
 			"msg":    "新增文章成功",
@@ -126,7 +129,7 @@ func PostArticleEdit(c *gin.Context) {
 	id, _ := strconv.ParseInt(c.PostForm("id"), 10, 64)
 	title := c.PostForm("title")
 	abstract := c.PostForm("abstract")
-	author := c.PostForm("author")
+	//author := c.PostForm("author")
 	cover := c.PostForm("cover")
 	tags := c.PostForm("tags")
 	sources := c.PostForm("sources")
@@ -165,7 +168,7 @@ func PostArticleEdit(c *gin.Context) {
 	item := &model.Article{}
 	item.Title = title
 	item.Abstract = abstract
-	item.Author = author
+	//item.Author = author
 	item.Cover = cover
 	item.Tags = tags
 	item.Sources = sources
@@ -174,12 +177,14 @@ func PostArticleEdit(c *gin.Context) {
 	item.CategoryId = category_id
 	item.AllowComments = allow_comments
 	item.Content = template.HTML(content)
-	has, err := databases.Orm.Id(id).Cols("title", "abstract", "author", "cover", "tags", "sources", "is_show", "allow_comments", "sort", "category_id", "content").Update(item)
+	//has, err := databases.Orm.Id(id).Cols("title", "abstract", "author", "cover", "tags", "sources", "is_show", "allow_comments", "sort", "category_id", "content").Update(item)
+	has, err := databases.Orm.Id(id).Cols("title", "abstract", "cover", "tags", "sources", "is_show", "allow_comments", "sort", "category_id", "content").Update(item)
 	if err != nil {
 		logger.Errorln("Article controller find errof:", err)
 		fmt.Println(err.Error())
 	}
 	if has > 0 {
+		redisPool.DelKeyByPrefix("article_category_num:")
 		c.JSON(http.StatusOK, gin.H{
 			"status": config.HttpSuccess,
 			"msg":    "更新成功",
@@ -220,6 +225,7 @@ func PostArticleDel(c *gin.Context) {
 		})
 		return
 	}
+	redisPool.DelKeyByPrefix("article_category_num:")
 	c.JSON(http.StatusOK, gin.H{
 		"status": config.HttpSuccess,
 		"msg":    "删除成功",

@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/model"
@@ -37,14 +38,35 @@ func (self ArticleLogic) List(c *gin.Context) []*model.Article {
 
 //endregion
 
-func (self ArticleLogic) All(c *gin.Context) []map[string]interface{} {
+func (self ArticleLogic) All(c *gin.Context, page int, limit int, category_id int64, tag_id string, t string) []map[string]interface{} {
 	objLog := GetLogger(c)
 	data := make([]*model.Article, 0)
-	err := databases.Orm.Table("article").Desc("id").Find(&data)
-	if err != nil {
-		objLog.Errorf("CategoryLogic find errof:", err)
+	err := databases.Orm.Table("article").Desc("id")
+	if category_id != 0 {
+		err.Where("category_id = ?", category_id)
+	}
+	if tag_id != "" {
+		err.Where("tag_id like ?", "%"+tag_id+"%")
+	}
+	if t != "" {
+		ts := strings.Split(t, "_")
+		if len(ts) == 2 { //2019_11
+			err.Where("year = ? and month = ?", ts)
+		} else { //2019
+			err.Where("year = ?", t)
+		}
+	}
+
+	err2 := Page(err, limit, limit*page-1).Desc("id").Find(&data)
+	if err2 != nil {
+		fmt.Println("err:", err2)
+		objLog.Errorf("CategoryLogic find errof:", err2)
 		return nil
 	}
+	return showArticles(data)
+}
+
+func showArticles(data []*model.Article) []map[string]interface{} {
 	list := make([]map[string]interface{}, len(data))
 	for key, value := range data {
 		item := make(map[string]interface{})

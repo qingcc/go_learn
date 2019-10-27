@@ -1,6 +1,7 @@
 package logic
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
 	"github.com/qingcc/goblog/databases"
@@ -35,6 +36,7 @@ func (self AdminNavigationNodeLogic) FindOne(c *gin.Context, field string, val i
 	_, err := databases.Orm.Where(field+" = ?", val).Get(item)
 	if err != nil {
 		objLog.Errorf("AdminLogic find errof:", err)
+		fmt.Println("AdminLogic find errof:", err)
 		return nil
 	}
 	return item

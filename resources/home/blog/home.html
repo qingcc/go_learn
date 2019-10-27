@@ -129,28 +129,32 @@
                     <h3 style="text-align: center;">Categories</h3>
                     <div id="accordion">
                         {{range $k, $v := .Categories}}
-                        <div class="panel">
-                            <div class="category">
-                                <span><i class="fa fa-angle-double-right"></i></span>
-                                <a class="categoryName" data-toggle="collapse" data-parent="#accordion"
-                                   href="#collapseOne">
-                                    <h5>{{$v.TitleHtml}}</h5>
-                                </a>
-                                <a class="categoryCount" href="javascript:;">
-                                    <h5>(50)</h5>
-                                </a>
+                            <div class="panel">
+                                <div class="category">
+                                    <span><i class="fa fa-angle-double-right"></i></span>
+                                    <a class="categoryName" data-toggle="collapse" data-parent="#accordion"
+                                       href="#category{{$v.id}}">
+                                        <h5>{{$v.title}}</h5>
+                                    </a>
+                                    <a class="categoryCount" href="javascript:;">
+                                        <h5>({{$v.num}})</h5>
+                                    </a>
+                                </div>
+                                {{if $v.has_child }}
+                                <div class="collapse" id="category{{$v.id}}">
+                                    <ul>
+                                        {{range $k1, $v1 := $v.child}}
+                                        <li>
+                                            <span><i class="fa fa-angle-right"></i></span>
+                                            <a href="?category={{$v1.id}}" class="categoryName">
+                                                <h5>{{$v1.title}} ({{$v1.num}})</h5>
+                                            </a>
+                                        </li>
+                                        {{end}}
+                                    </ul>
+                                </div>
+                                {{end}}
                             </div>
-                            <div class="collapse" id="collapseOne">
-                                <ul>
-                                    <li>
-                                        <span><i class="fa fa-angle-right"></i></span>
-                                        <a href="javascript:;" class="categoryName">
-                                            <h5>svg (50)</h5>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
                         {{end}}
                     </div>
 
