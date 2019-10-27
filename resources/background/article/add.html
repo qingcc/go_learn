@@ -1,0 +1,126 @@
+{{define "content"}}
+<article class="page-container">
+<form class="form form-horizontal" action="/admin/article/add">
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章标题：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" class="input-text" value="" placeholder="" id="articletitle" name="title">
+        </div>
+    </div>
+    {{/*<div class="row cl">*/}}
+        {{/*<label class="form-label col-xs-4 col-sm-2">简略标题：</label>*/}}
+        {{/*<div class="formControls col-xs-8 col-sm-9">*/}}
+            {{/*<input type="text" class="input-text" value="" placeholder="" id="articletitle2" name="articletitle2">*/}}
+        {{/*</div>*/}}
+    {{/*</div>*/}}
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+        <div class="formControls col-xs-8 col-sm-9"> <span class="select-box">
+				<select name="category_id" class="select">
+                    {{range $key, $val := .Level}}
+                        <option value="{{$val.Id}}">{{ $val.TitleHtml }}</option>
+                    {{end}}
+				</select>
+				</span>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">排序值：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" class="input-text" value="0" placeholder="" id="articlesort" name="sort">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">关键词：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" class="input-text" value="" placeholder="" id="keywords" name="tags">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">文章摘要：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <textarea name="abstract" cols="" rows="" class="textarea"  placeholder="说点什么...最少输入10个字符" datatype="*10-100" dragonfly="true" nullmsg="备注不能为空！" onKeyUp="$.Huitextarealength(this,200)"></textarea>
+            <p class="textarea-numberbar"><em class="textarea-length">0</em>/200</p>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">文章作者：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" class="input-text" value="0" placeholder="" id="author" name="author">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">文章来源：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <input type="text" class="input-text" value="0" placeholder="" id="sources" name="sources">
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">是否显示：</label>
+        <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+            <div class="check-box">
+                <input type="checkbox" id="allowcomments" name="is_show" value="1">
+                <label for="checkbox-pinglun">&nbsp;</label>
+            </div>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">允许评论：</label>
+        <div class="formControls col-xs-8 col-sm-9 skin-minimal">
+            <div class="check-box">
+                <input type="checkbox" id="allowcomments" name="allow_comments" value="1">
+                <label for="checkbox-pinglun">&nbsp;</label>
+            </div>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">缩略图：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <div class="uploader-thum-container">
+                <input class="input-text small upload-path" datatype="*" name="cover" type="text" value="">
+                <div id="fileList" class="uploader-list"></div>
+                <div id="picker"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-2">文章内容：</label>
+        <div class="formControls col-xs-8 col-sm-9">
+            <div id="content-editor">
+            </div>
+            <textarea id="content" name="content" style="display: none"></textarea>
+            <span class="Validform_checktip">*</span>
+        </div>
+    </div>
+    <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+            <button onClick="addOrEditAjax();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
+            <button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
+            <button onClick="removeIframe();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+             </div>
+    </div>
+</form>
+</article>
+
+{{end}}
+{{define "js"}}
+<script type="text/javascript" src="/public/background/js/wangEditor-3.1.1/release/wangEditor.js"></script>
+<script type="text/javascript" src="/public/common/webuploader/webuploader.min.js"></script>
+<script type="text/javascript" src="/public/common/upload.js"></script>
+<script type="text/javascript">
+        $(function(){
+
+            var E = window.wangEditor;
+            var editor = new E('#content-editor');
+            var $text1 = $('#content');
+            editor.customConfig.onchange = function (html) {
+                // 监控变化，同步更新到 textarea
+                $text1.val(html)
+            };
+            // 配置服务器端地址
+            editor.customConfig.uploadImgServer = '/admin/upload/controllers/image';
+            editor.customConfig.uploadFileName = 'FileData';
+            editor.create();
+});
+</script>
+{{end}}

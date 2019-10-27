@@ -1,0 +1,88 @@
+{{define "content"}}
+<article class="page-container">
+    <form class="form form-horizontal" id="form-admin-role-add" action="/admin/admin_role/edit">
+        <input type="hidden" name="id" id="id" value="{{ .Role.Id }}">
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>角色名称：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text required" value="{{ .Role.RoleName }}" placeholder="" id="roleName" name="role_name">
+            </div>
+        </div>
+        <div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">备注：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+                <input type="text" class="input-text" value="{{ .Role.Describe }}" placeholder="" id="describe" name="describe">
+            </div>
+        </div>
+        <div class="row cl">
+            <table class="table table-border table-bordered table-hover table-bg">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="6">角色管理</th>
+                </tr>
+                <tr class="text-c">
+                    <th align="left" width="20%">导航管理</th>
+                    <th align="left" width="70%">权限分配</th>
+                    <th align="left" width="10%">全选</th>
+                </tr>
+                </thead>
+                <tbody class="check-to-del">
+                {{ range $key,$val:=.Data }}
+                <tr class="text-c">
+                    <td align="left">{{ $val.TitleHtml }}</td>
+                    <td  align="left">
+                    {{ range $k,$v:= $val.Node }}
+                        <label class="">
+                            <input type="checkbox" value="{{$v.Id}}" name="node[]">
+                        {{$v.Title}}
+                        </label>
+                    {{end}}
+                    </td>
+                    <td align="left">
+                    {{if ne $val.Action ""}}
+                        <input type="checkbox" value="{{$val.Id}}" name="" class="all">
+                    {{end}}
+                    </td>
+                </tr>
+                {{ end }}
+                </tbody>
+            </table>
+        </div>
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+                <button type="button" class="btn btn-success radius" id="admin-role-save" onclick="addOrEditAjax()" name="admin-role-save"><i class="icon-ok"></i> 确定</button>
+            </div>
+        </div>
+        <input type="hidden" id="checked-ids" value="{{.CheckedIds}}">
+    </form>
+</article>
+{{end}}
+{{define "js"}}
+<script type="text/javascript">
+    $(function () {
+        var ids = $("#checked-ids").val();
+        if (ids != "") {
+            $(ids.split(",")).each(function () {
+                $("input[value="+this + "]").prop("checked", true);
+                // $("#node_"+this).prop("checked", true);
+                // $("input[id=node_" + this + "]").prop("checked", true);
+            })
+        }
+        // $("input[type='checkbox").click(function () {
+        //     if($(this).prop('checked')==true){
+        //         $(this).prop("checked", true);
+        //     }else {
+        //         $(this).prop("checked", false);
+        //     }
+        // });
+
+        $('.all').click(function () {
+            if($(this).prop('checked')==true){
+                $(this).parents('tr').eq(0).find("input[type='checkbox']").prop("checked", true);
+            }else {
+                $(this).parents('tr').eq(0).find("input[type='checkbox']").prop("checked", false);
+            }
+        })
+    })
+</script>
+{{end}}
