@@ -6,6 +6,7 @@ import (
 	"github.com/qingcc/goblog/config"
 	"github.com/qingcc/goblog/databases"
 	redisPool "github.com/qingcc/goblog/util/redis"
+	"time"
 
 	//"github.com/polaris1119/logger"
 	"github.com/polaris1119/logger"
@@ -84,6 +85,8 @@ func PostArticleAdd(c *gin.Context) {
 		Sources:       sources,
 		IsShow:        is_show,
 		Sort:          sort,
+		Year:          int64(time.Now().Year()),
+		Month:         int64(time.Now().Month()),
 		AllowComments: allow_comments,
 		Content:       template.HTML(content),
 	})
