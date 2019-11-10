@@ -11,5 +11,5 @@ func main() {
 	//err := databases.Orm.Sync2(new(model.Test1))
 	//fmt.Println("err:", err)
 	//defer databases.Orm.Close()
-	router.Run(":2019")
+	router.Run(":6019")
 }
