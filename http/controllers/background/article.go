@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/config"
 	"github.com/qingcc/goblog/databases"
-	redisPool "github.com/qingcc/goblog/util/redis"
+	redisPool "github.com/qingcc/goblog/utils/redis"
 	"time"
 
 	//"github.com/polaris1119/logger"

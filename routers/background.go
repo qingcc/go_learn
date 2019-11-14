@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/contrib/sessions"
 	"github.com/gin-gonic/gin"
 	"github.com/qingcc/goblog/databases"
-	util "github.com/qingcc/goblog/util/upload"
+	util "github.com/qingcc/goblog/utils/upload"
 
 	//_ "github.com/go-sql-driver/mysql"
 	"github.com/qingcc/goblog/http/controllers/background"

@@ -8,7 +8,7 @@ import (
 	"github.com/qingcc/goblog/databases"
 	"github.com/qingcc/goblog/model"
 	"github.com/qingcc/goblog/util"
-	redisPool "github.com/qingcc/goblog/util/redis"
+	redisPool "github.com/qingcc/goblog/utils/redis"
 	"strconv"
 	"strings"
 )
