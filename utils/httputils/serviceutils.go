@@ -14,7 +14,7 @@ import (
 	"strings"
 	"sync"
 	"time"
-	"github.com/qingcc/goblog/utils"
+	"unsafe"
 )
 
 const (
@@ -71,10 +71,57 @@ func (c *ServiceHttpClient)SendJson(url string, body []byte, headers map[string]
 		Endpoint:        url,
 		ReqBody:         body,
 		Headers:         headers,
+		DataType: DATA_TYPE_JSON,
 		ConcurrentCount: concurrentCount,
 	}
 	return c.SendWithRequestContext(ctx, http.MethodPost, pRS)
 }
+
+
+func (c *ServiceHttpClient)SendXml(url string, body []byte, headers map[string]string, concurrentCount int, pRS interface{}) (code int, message string, data []byte) {
+	ctx := HttpRequestContext{
+		Endpoint:        url,
+		ReqBody:         body,
+		Headers:         headers,
+		DataType: DATA_TYPE_XML,
+		ConcurrentCount: concurrentCount,
+	}
+	return c.SendWithRequestContext(ctx, http.MethodPost, pRS)
+}
+func (c *ServiceHttpClient)SendJsonDelete(url string, headers map[string]string, concurrentCount int, pRS interface{}) (code int, message string, data []byte) {
+	ctx := HttpRequestContext{
+		Endpoint:        url,
+		Headers:         headers,
+		DataType: DATA_TYPE_JSON,
+		ConcurrentCount: concurrentCount,
+	}
+	return c.SendWithRequestContext(ctx, http.MethodDelete, pRS)
+}
+
+
+func (c *ServiceHttpClient)GetJson(url string, headers map[string]string, concurrentCount int, pRS interface{}) (code int, message string, data []byte) {
+	ctx := HttpRequestContext{
+		Endpoint:        url,
+		Headers:         headers,
+		DataType: DATA_TYPE_JSON,
+		ConcurrentCount: concurrentCount,
+	}
+	return c.SendWithRequestContext(ctx, http.MethodGet, pRS)
+}
+
+
+func (c *ServiceHttpClient)GetXml(url string, headers map[string]string, concurrentCount int, pRS interface{}) (code int, message string, data []byte) {
+	ctx := HttpRequestContext{
+		Endpoint:        url,
+		Headers:         headers,
+		DataType: DATA_TYPE_XML,
+		ConcurrentCount: concurrentCount,
+	}
+	return c.SendWithRequestContext(ctx, http.MethodGet, pRS)
+}
+
+
+
 
 func (c *ServiceHttpClient)SendWithRequestContext(ctx HttpRequestContext, method string, pRS interface{}) (code int, message string, data []byte)  {
 	concurrentCount := 1
@@ -90,7 +137,7 @@ func (c *ServiceHttpClient)SendWithRequestContext(ctx HttpRequestContext, method
 		for i := 0 ; i < concurrentCount ; i++ {
 			go func(index int) {
 				defer wg.Done()
-				if d, err := c.readData(method, &ctx); err == nil {
+				if d, err := c.reqData(method, &ctx); err == nil {
 					dataChan <- d
 				}
 			}(i)
@@ -116,7 +163,7 @@ func (c *ServiceHttpClient)SendWithRequestContext(ctx HttpRequestContext, method
 		}
 	}else {
 		for i := 0; i < 3 ; i++ {
-			if d, err := c.readData(method, &ctx); err == nil {
+			if d, err := c.reqData(method, &ctx); err == nil {
 				data = d
 				code, message = deserializeData(d, ctx, pRS)
 				break
@@ -141,11 +188,11 @@ func (c *ServiceHttpClient)SendWithRequestContext(ctx HttpRequestContext, method
 
 	if code != SUCCESS {
 		log.Printf("[error] request url: %s, error: %s", ctx.Endpoint, message)
-		log.Printf("[error] response: %s", utils.Bytes2String(data))
+		log.Printf("[error] response: %s", Bytes2String(data))
 	}
 }
 
-func (c *ServiceHttpClient)readData(method string, ctx *HttpRequestContext) (data []byte, err error) {
+func (c *ServiceHttpClient)reqData(method string, ctx *HttpRequestContext) (data []byte, err error) {
 	if c.ServiceClient == nil {
 		c.initHttpClient()
 	}
@@ -218,4 +265,9 @@ func deserializeData(d []byte, ctx HttpRequestContext, pRS interface{}) (code in
 		}
 	}
 	return
+}
+
+
+func Bytes2String(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
 }
